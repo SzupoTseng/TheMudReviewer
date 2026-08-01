@@ -4,7 +4,7 @@
 >
 > **14 篇 · 82 個單元 · 7 個附錄 · 604 條交叉引用（0 斷鏈）**
 >
-> 📖 **[線上閱讀（繁體）](https://szupotseng.github.io/TheMudReviewer/泥巴考古學.html)**　·　**[简体](https://szupotseng.github.io/TheMudReviewer/cn/泥巴考古学.html)**
+> 📖 **[線上閱讀（繁體）](https://szupotseng.github.io/TheMudReviewer/TheMudReviewer.html)**　·　**[简体](https://szupotseng.github.io/TheMudReviewer/cn/TheMudReviewer.html)**
 
 ### 這本書分成兩半
 

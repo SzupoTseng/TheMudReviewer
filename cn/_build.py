@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """组装《泥巴考古学》成品:
-  1) 合并单一 Markdown 档  泥巴考古学_全书.md
-  2) 图文 HTML(侧边子目录)  泥巴考古学.html
+  1) 合并单一 Markdown 档  TheMudReviewer.md
+  2) 图文 HTML(侧边子目录)  TheMudReviewer.html
 版面沿用《开源器识》_build.py(同一套 CSS / 解析器 / 封面逻辑),
 依 BUILD_STANDARD.md：只改常数区与 title_for/part_for 在地化 regex。
 内容为一套没有规格书的 MUD 协议的逆向、重写与七次事故。
@@ -12,7 +12,8 @@ import os, re, glob, html, base64
 
 BOOK = os.path.dirname(os.path.abspath(__file__))
 
-BOOK_TITLE = "泥巴考古学"
+BOOK_TITLE = "泥巴考古学"          # 显示用（<h1>／<title>／封面 alt）
+BOOK_SLUG  = "TheMudReviewer"   # 文件名用（纯 ASCII，避免网址出现 percent-encoding）
 BOOK_SUB   = "从一个 APK 到三十七年的驱动血脉 · The MUD Reviewer"
 COVER_CANDIDATES = ["TheMudReviewer.png", "泥巴考古学.png", "cover.png"]
 
@@ -84,7 +85,7 @@ def build_merged():
     for base in FILES:
         text = open(os.path.join(BOOK, base), encoding="utf-8").read().rstrip()
         parts.append("\n\n" + text + "\n\n---\n")
-    out = os.path.join(BOOK, f"{BOOK_TITLE}_全书.md")
+    out = os.path.join(BOOK, f"{BOOK_SLUG}.md")
     open(out, "w", encoding="utf-8").write("\n".join(parts))
     return out
 
@@ -263,7 +264,7 @@ def build_html():
 <title>{html.escape(BOOK_TITLE)} — {html.escape(BOOK_SUB)}</title><style>{CSS}</style></head>
 <body><div id="wrap"><nav id="side">{''.join(nav)}</nav><main>{''.join(body)}</main></div>
 <script>{JS}</script></body></html>"""
-    out = os.path.join(BOOK, f"{BOOK_TITLE}.html")
+    out = os.path.join(BOOK, f"{BOOK_SLUG}.html")
     open(out, "w", encoding="utf-8").write(page)
     return out
 

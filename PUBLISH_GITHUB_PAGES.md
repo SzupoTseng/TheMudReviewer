@@ -8,8 +8,8 @@
 | 檔案 | 角色 |
 |------|------|
 | `index.html` | 多語落地頁 = 網站首頁 |
-| `泥巴考古學.html` | 繁體全書（側欄目錄，單檔 555 KB） |
-| `cn/泥巴考古学.html` | 简体全书 |
+| `TheMudReviewer.html` | 繁體全書（側欄目錄，單檔 555 KB） |
+| `cn/TheMudReviewer.html` | 简体全书 |
 | `TheMudReviewer.png` | 封面海報（落地頁引用；書內為 base64 內嵌） |
 | `.nojekyll` | **必要**。沒有它 GitHub Pages 會跑 Jekyll，`_build.py` 這類底線開頭的檔會被特殊處理 |
 
@@ -40,7 +40,7 @@ branch 選 `main`、資料夾選 **`/ (root)`**。
 改了任何 `.md` 之後：
 
 ```bash
-python _build.py           # 繁體 → 泥巴考古學.html + _全書.md
+python _build.py           # 繁體 → TheMudReviewer.html + _全書.md
 python _convert_cn.py      # 繁 → 简，並產生 cn/_build.py
 cd cn && python _build.py  # 简体 → 泥巴考古学.html + _全书.md
 ```

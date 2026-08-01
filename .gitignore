@@ -1,0 +1,13 @@
+# 建置暫存
+__pycache__/
+*.pyc
+.DS_Store
+Thumbs.db
+
+# 編輯器
+.vscode/
+.idea/
+*.swp
+
+# 註：產物（泥巴考古學.html / _全書.md 與 cn/ 對應檔）**刻意進版控**——
+# 本倉庫同時是 GitHub Pages 站台，Pages 直接發佈根目錄，沒有 build step。

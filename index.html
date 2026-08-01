@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>泥巴考古學 · The MUD Reviewer</title>
+<meta name="description" content="把一套沒有規格書的 MUD 協議還原出來、再據以重寫一個客戶端——逆向、協議、架構，以及七次交付了不能用的東西。"/>
+<style>
+  :root{--ink:#1d2230;--mut:#5a6378;--pa:#fbf8f0;--accent:#9a3b2f;--accent2:#2f5d7a;--dark:#14182a;--gold:#f4b860;--boxln:#e8c88a}
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{font-family:"Noto Serif CJK TC","Songti TC","PingFang TC","Microsoft JhengHei",serif;color:var(--ink);
+       background:radial-gradient(1200px 600px at 50% -10%,#fff 0,var(--pa) 60%);min-height:100vh;line-height:1.8}
+  .wrap{max-width:980px;margin:0 auto;padding:56px 24px 96px}
+  header{text-align:center;margin-bottom:14px}
+  h1{font-size:42px;letter-spacing:8px;margin:0 0 8px}
+  .en-title{font-size:18px;letter-spacing:3px;color:var(--accent);font-family:Georgia,serif;margin:0 0 10px}
+  .sub{color:var(--mut);font-size:15px;font-family:"Noto Sans CJK TC","PingFang TC",sans-serif;margin:0 auto;max-width:660px}
+  .hero{display:flex;gap:36px;align-items:center;margin:36px 0 44px;flex-wrap:wrap;justify-content:center}
+  .hero img{width:340px;max-width:90vw;border-radius:14px;box-shadow:0 18px 50px rgba(20,24,42,.32)}
+  .pitch{flex:1;min-width:280px;max-width:460px}
+  .pitch .quote{font-size:18px;line-height:1.9;color:#3a3326;background:#fdf3e3;border:1px solid var(--boxln);
+       border-radius:14px;padding:20px 24px;box-shadow:0 4px 14px rgba(180,140,60,.12)}
+  .pitch .quote b{color:#9a6a1a}
+  h2.section{font-family:"Noto Sans CJK TC",sans-serif;font-size:13px;letter-spacing:3px;color:var(--mut);
+       text-align:center;text-transform:uppercase;margin:40px 0 18px}
+  .cards{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+  @media(max-width:680px){.cards{grid-template-columns:1fr}h1{font-size:34px;letter-spacing:5px}}
+  .card{display:block;text-decoration:none;color:inherit;background:var(--dark);border-radius:16px;padding:26px 26px 22px;
+       box-shadow:0 10px 30px rgba(20,24,42,.25);transition:transform .15s,box-shadow .15s;position:relative;overflow:hidden}
+  .card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(20,24,42,.4)}
+  .card .lang{font-family:"Noto Sans CJK TC",sans-serif;font-size:13px;letter-spacing:2px;color:#49c5e0}
+  .card .name{font-size:26px;color:#fff;margin:6px 0 4px;letter-spacing:2px}
+  .card .meta{font-family:"Noto Sans CJK TC",sans-serif;font-size:13px;color:#9aa3c0;line-height:1.6}
+  .card .go{display:inline-block;margin-top:14px;font-family:"Noto Sans CJK TC",sans-serif;font-size:13px;
+       color:var(--gold);border:1px solid #3a426a;border-radius:8px;padding:6px 14px}
+  .card.soon{opacity:.62}
+  .pdfrow{text-align:center;margin-top:14px;font-family:"Noto Sans CJK TC",sans-serif;font-size:14px}
+  .pdfrow a{color:var(--accent2);text-decoration:none;margin:0 10px;border-bottom:1px solid #cdd9e0;padding-bottom:1px}
+  .pdfrow a:hover{color:var(--accent)}
+  .evi{font-family:"Noto Sans CJK TC",sans-serif;text-align:center;font-size:14px;color:var(--mut);margin-top:10px}
+  .evi code{background:#f2ece0;border-radius:5px;padding:2px 8px;font-size:13px}
+  footer{text-align:center;margin-top:56px;color:var(--mut);font-size:12.5px;font-family:"Noto Sans CJK TC",sans-serif;line-height:1.9}
+  footer a{color:var(--accent2);text-decoration:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>泥巴考古學</h1>
+    <p class="en-title">REVERSING ZJMUD</p>
+    <p class="sub">一本關於「把一套沒有規格書的協議還原出來、再據以重寫一個客戶端」的工程筆記——從 1.1 MB 的 APK 到 177 條測試。</p>
+  </header>
+
+  <div class="hero">
+    <img src="TheMudReviewer.png" alt="泥巴考古學 · The MUD Reviewer 封面海報"/>
+    <div class="pitch">
+      <p class="quote">逆向工程的盡頭，不是「我看懂了」，<br/>而是「<b>我能證明它，而且我的實作經得起真機打臉</b>」。</p>
+    </div>
+  </div>
+
+  <h2 class="section">線上閱讀 · Read online</h2>
+  <div class="cards">
+    <a class="card" href="泥巴考古學.html">
+      <div class="lang">繁體中文</div>
+      <div class="name">線上閱讀全書</div>
+      <div class="meta">14 篇 82 單元 ＋ 7 附錄 · 側欄目錄 · 116 個 opcode 完整索引 ＋ 💡 君之一席話</div>
+      <span class="go">開始閱讀 →</span>
+    </a>
+    <a class="card" href="cn/泥巴考古学.html">
+      <div class="lang">简体中文</div>
+      <div class="name">在线阅读全书</div>
+      <div class="meta">14 篇 82 单元 ＋ 7 附录 · 侧栏目录 · 116 个 opcode 完整索引 ＋ 💡 君之一席话</div>
+      <span class="go">开始阅读 →</span>
+    </a>
+  </div>
+
+  <h2 class="section">全書合併版 · Single file</h2>
+  <p class="pdfrow">
+    <a href="泥巴考古學_全書.md">📄 繁體中文 Markdown</a>
+    <a href="cn/泥巴考古学_全书.md">📄 简体中文 Markdown</a>
+  </p>
+
+  <h2 class="section">證據等級 · Evidence hierarchy</h2>
+  <p class="evi">
+    書裡每一條協議斷言都標了出處。衝突時的順序永遠是：<br/>
+    <code>🟢 實機封包</code> &gt; <code>🟡 伺服器原始碼</code> &gt; <code>🟠 客戶端反編譯</code> &gt; <code>🔴 推論</code>
+  </p>
+
+  <footer>
+    原始碼：<a href="https://github.com/SzupoTseng/zjmud-rust">github.com/SzupoTseng/zjmud-rust</a><br/>
+    僅供教育與研究用途 · For educational &amp; research use only<br/>
+    客戶端為淨室實作：僅依對外部行為的觀察整理互通性規格，未複製原始碼或資源。
+  </footer>
+</div>
+</body>
+</html>

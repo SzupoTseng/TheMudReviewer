@@ -4013,7 +4013,7 @@ node webclient/tools/unpack-lib.mjs libs/&lt;slug&gt; --out /tmp/&lt;slug&gt;</c
 <h3>第十四篇　地層學：ZJMUD 協議自己的歷史</h3>
 <table><thead><tr><th>#</th><th>單元</th></tr></thead><tbody><tr><td>079</td><td>三份 header 的地層 — 一次斷代</td></tr><tr><td>080</td><td>擴充層的內部結構 — 五個前綴就是五次擴充</td></tr><tr><td>081</td><td>第三代與撞號的機制 — 兩個團隊各自從 600 開始</td></tr><tr><td>082</td><td>協議的年表 — 以及它為什麼永遠是 1.0</td></tr></tbody></table>
 <h3>附錄</h3>
-<table><thead><tr><th>附錄</th><th>內容</th></tr></thead><tbody><tr><td>A</td><td>opcode 總索引（116 個）＋ 分隔符速查</td></tr><tr><td>B</td><td>檔案地圖與接手指南</td></tr><tr><td>C</td><td>1:1 還原檢查表</td></tr><tr><td>D</td><td>MUD 家族年表 1978–2026（主幹／客戶端／<strong>英文線</strong>／<strong>中文線</strong>）＋ intermud 名錄快照</td></tr><tr><td>E</td><td>FluffOS / LPC 技術速查（efun／apply／config／telnet／WASM API／VM 指令）</td></tr><tr><td>F</td><td>17 份 mudlib 的血緣、落差與實測數據</td></tr><tr><td><strong>G</strong></td><td><strong>本頁</strong>：全書單元索引 ＋ 引用結構</td></tr><tr><td><strong>H</strong></td><td><strong>ZJMUD 協議規格與客戶端系統分析</strong> —— 語言中立的規範層：傳輸層／opcode 分派／逐 opcode payload／樣式方言／登入狀態機／架構與驗收矩陣。<strong>不必讀正文也能照做</strong></td></tr></tbody></table>
+<table><thead><tr><th>附錄</th><th>內容</th></tr></thead><tbody><tr><td>A</td><td>opcode 總索引（116 個）＋ 分隔符速查</td></tr><tr><td>B</td><td>檔案地圖與接手指南</td></tr><tr><td>C</td><td>1:1 還原檢查表</td></tr><tr><td>D</td><td>MUD 家族年表 1978–2026（主幹／客戶端／<strong>英文線</strong>／<strong>中文線</strong>）＋ intermud 名錄快照</td></tr><tr><td>E</td><td>FluffOS / LPC 技術速查（efun／apply／config／telnet／WASM API／VM 指令）</td></tr><tr><td>F</td><td>17 份 mudlib 的血緣、落差與實測數據</td></tr><tr><td><strong>G</strong></td><td><strong>本頁</strong>：全書單元索引 ＋ 引用結構</td></tr><tr><td><strong>H</strong></td><td><strong>ZJMUD 協議規格與客戶端系統分析</strong>（15 節）—— 語言中立的規範層：傳輸層／opcode 分派／逐 opcode payload／樣式方言／登入狀態機／架構與驗收矩陣／<strong>畫面拓撲與 opcode 去處</strong>／會話生命週期／本地偏好／<strong>13 行實機黃金樣本</strong>／<strong>可驗證的伺服器環境</strong>。<strong>不必讀正文也能從 0 照做</strong></td></tr></tbody></table>
 <hr/>
 <h2>G.2　引用結構 — 本書自己的量測</h2>
 <p>把全書的 <code>§NNN</code> 交叉引用掃一遍：</p>
@@ -4070,8 +4070,8 @@ EOF</code></pre>
 <h2>H.0　定位、讀法與證據等級</h2>
 <h3>H.0.1　這份文件想達成什麼</h3>
 <p>一句話：**把這份附錄交給一個沒有任何背景知識的實作者（含 LLM），<br/>他應該能寫出一個可以登入、可以走路、可以跟 NPC 互動、畫面不會壞掉的 ZJMUD 客戶端。**</p>
-<p>達成這件事需要五類知識，缺一不可：</p>
-<table><thead><tr><th>#</th><th>類別</th><th>本附錄章節</th><th>少了它會怎樣</th></tr></thead><tbody><tr><td>1</td><td><strong>怎麼把位元組變成行</strong></td><td>H.1</td><td>連線在第一個位元組就死掉</td></tr><tr><td>2</td><td><strong>怎麼把行變成事件</strong></td><td>H.2、H.3</td><td>控制字元印在畫面上</td></tr><tr><td>3</td><td><strong>怎麼把事件的內容拆成欄位</strong></td><td>H.4、H.5</td><td>按鈕數量不對、顏色錯、指令送不出去</td></tr><tr><td>4</td><td><strong>怎麼從連上到進世界</strong></td><td>H.6</td><td>永遠停在版本挑戰那一行</td></tr><tr><td>5</td><td><strong>怎麼組織這些東西才不會腐爛</strong></td><td>H.7、H.8</td><td>三個月後沒人敢動</td></tr></tbody></table>
+<p>達成這件事需要十類知識，缺一不可。<br/><strong>前五類是「協議」，後五類是「客戶端」——只做前五類會得到一個協議解析器，不是一個客戶端。</strong></p>
+<table><thead><tr><th>#</th><th>類別</th><th>本附錄章節</th><th>少了它會怎樣</th></tr></thead><tbody><tr><td>1</td><td><strong>怎麼把位元組變成行</strong></td><td>H.1</td><td>連線在第一個位元組就死掉</td></tr><tr><td>2</td><td><strong>怎麼把行變成事件</strong></td><td>H.2、H.3</td><td>控制字元印在畫面上</td></tr><tr><td>3</td><td><strong>怎麼把事件的內容拆成欄位</strong></td><td>H.4、H.5</td><td>按鈕數量不對、顏色錯、指令送不出去</td></tr><tr><td>4</td><td><strong>怎麼從連上到進世界</strong></td><td>H.6</td><td>永遠停在版本挑戰那一行</td></tr><tr><td>5</td><td><strong>怎麼組織這些東西才不會腐爛</strong></td><td>H.7、H.8</td><td>三個月後沒人敢動</td></tr><tr><td>6</td><td><strong>畫面要長什麼樣、每個 opcode 畫到哪一區</strong></td><td><strong>H.11</strong></td><td>解得出來，但不知道要蓋什麼；版面全靠實作者自己發明</td></tr><tr><td>7</td><td><strong>斷線、逾時、換伺服器怎麼辦</strong></td><td><strong>H.12</strong></td><td>掛機一晚回來是死的，而且不知道為什麼</td></tr><tr><td>8</td><td><strong>哪些狀態要留在本地</strong></td><td><strong>H.13</strong></td><td>每次重開都要重設一次，帳密處理也會出錯</td></tr><tr><td>9</td><td><strong>怎麼自證做對了</strong></td><td><strong>H.14</strong></td><td>沒有任何辦法驗證，只能靠「看起來對」</td></tr><tr><td>10</td><td><strong>沒有伺服器怎麼測</strong></td><td><strong>H.15</strong></td><td>H.8.3 的實機驗收根本跑不了</td></tr></tbody></table>
 <h3>H.0.2　規範用語</h3>
 <p>本附錄採 RFC 2119 精神，但用中文表述：</p>
 <table><thead><tr><th>用語</th><th>意義</th></tr></thead><tbody><tr><td><strong>必須</strong></td><td>不做就無法與既有伺服器互通，或會造成連線中斷／資料遺失</td></tr><tr><td><strong>應</strong></td><td>不做仍能運作，但會在特定 mudlib 或特定情境下出錯</td></tr><tr><td><strong>可</strong></td><td>實作者自由選擇，不影響互通性</td></tr><tr><td><strong>不得</strong></td><td>做了會造成安全問題或協議違規</td></tr></tbody></table>
@@ -4463,7 +4463,152 @@ ff fb 2a   IAC WILL CHARSET       (42)</code></pre>
 <p>如果只想先做出「能登入、能走路、能看 NPC」的版本，這是最短路徑：</p>
 <table><thead><tr><th>順序</th><th>做什麼</th><th>對應章節</th></tr></thead><tbody><tr><td>1</td><td>TCP + IAC 剝除 + 拒絕協商 + UTF-8 寬容解碼</td><td>H.1</td></tr><tr><td>2</td><td>分行 + 變長 opcode 擷取 + 未知降級</td><td>H.2</td></tr><tr><td>3</td><td>版本挑戰 → 登入 → <code>ESC000</code> 狀態碼</td><td>H.6</td></tr><tr><td>4</td><td><code>ESC002</code> / <code>ESC004</code>（房間標題與描述）</td><td>H.3.1</td></tr><tr><td>5</td><td><code>ESC003</code>（出口）→ <strong>此時已經可以走路</strong></td><td>H.4.1</td></tr><tr><td>6</td><td><code>ESC005</code>（物件清單）+ 一般訊息</td><td>H.4.2</td></tr><tr><td>7</td><td><code>ESC007</code> + <code>ESC009</code>（詳情 + 動作列）→ <strong>此時已經可以跟 NPC 互動</strong></td><td>H.4.4</td></tr><tr><td>8</td><td><code>ESC014</code>（代送指令）→ <strong>此時大部分流程不會卡住</strong></td><td>H.3.2</td></tr><tr><td>9</td><td>樣式方言（顏色 + <code>cmds:</code> 連結）</td><td>H.5</td></tr><tr><td>10</td><td><code>ESC012</code>（屬性條）+ <code>ESC001</code>（文字輸入）</td><td>H.4.5、H.4.9</td></tr></tbody></table>
 <p>前 8 步做完就是一個<strong>可玩</strong>的客戶端。第 9、10 步之後就是一個<strong>好用</strong>的客戶端。<br/>其餘所有 opcode 都是錦上添花，可以按 H.3.2 的發送量統計排序慢慢補。</p>
-<blockquote class="concept"><p>💡 君之一席話<br/><strong>一份規格是否夠用，不看它寫了多少，而看讀的人能不能在第 5 步就跑起來。</strong><br/>上面這張表刻意把「可以走路」放在第 5 步、「可以互動」放在第 7 步——<br/>因為一個三個月才會動的實作，不管規格寫得多完整，都會在中途被放棄。</p></blockquote></section></main></div>
+<p><strong>但在動手之前</strong>，先看 H.15（架一台可測的伺服器）與 H.14（黃金樣本）——<br/>沒有這兩樣，上面每一步都無法自證做對了；<br/>以及 H.11（畫面要長什麼樣），否則第 4 步就會卡在「這些東西該畫到哪裡」。</p>
+<blockquote class="concept"><p>💡 君之一席話<br/><strong>一份規格是否夠用，不看它寫了多少，而看讀的人能不能在第 5 步就跑起來。</strong><br/>上面這張表刻意把「可以走路」放在第 5 步、「可以互動」放在第 7 步——<br/>因為一個三個月才會動的實作，不管規格寫得多完整，都會在中途被放棄。</p></blockquote>
+<hr/>
+<h2>H.11　畫面拓撲與 opcode 去處</h2>
+<blockquote class="quote"><p>前面十節講「怎麼把位元組變成事件」。這一節講<strong>事件要畫到哪裡</strong>。<br/>少了這一節，實作者解得出每一個欄位，卻得自己發明整個介面——<br/>然後與伺服器的假設對不上（例如伺服器以為「換房間會清空物件欄」，而你沒清）。</p></blockquote>
+<h3>H.11.1　畫面盤點 🟠</h3>
+<p>整個客戶端只有 4 個畫面，其中<strong>只有一個是複雜的</strong>：</p>
+<table><thead><tr><th>畫面</th><th>用途</th><th>佔使用時間</th></tr></thead><tbody><tr><td>登入</td><td>帳號登入、註冊、分區選擇、建立角色</td><td>少</td></tr><tr><td><strong>主場景</strong></td><td><strong>遊戲主體</strong></td><td><strong>約 95%</strong></td></tr><tr><td>對話框</td><td>NPC 對話（模態，<code>ESC010</code>）</td><td>少</td></tr><tr><td>使用者中心</td><td>改密碼、綁手機／email（純表單 + HTTP）</td><td>極少</td></tr></tbody></table>
+<p><strong>先做主場景。</strong> 登入畫面可以先用一個最陽春的表單，使用者中心可以完全不做。</p>
+<h3>H.11.2　主場景版面（七個帶）🟠</h3>
+<p>原始版面是直向手機、固定不旋轉，由上到下分成七個帶：</p>
+<pre class="code"><code>┌─────────────────────────────────────────┐
+│ ① 迷你聊天列（可摺疊，預設隱藏）           │  ESC100
+├─────────────────────────────────────────┤
+│ ② 房間標題列                              │  ESC002 + ESC021 + ESC006(bs)
+│   [房間名] [標題按鈕列 →→→] [摺疊鈕]       │
+├─────────────────────────────────────────┤
+│ ③ 房間描述（可隱藏）                       │  ESC004 / ESC023
+├──────────┬──────────────────────────────┤
+│ ④ 物件欄  │ ⑤ 主訊息區                     │  ④ ESC005/905/022
+│  垂直捲動 │   ★ 所有疊層都蓋在這一區上       │  ⑤ 預設訊息 + 疊層
+│          │                              │
+├──────────┼──────────────────────────────┤
+│          │ ⑥ 方向盤 ⇄ 自訂按鈕列（互斥）    │  ESC003/903/913 ⇄ ESC006
+├──────────┴──────────────────────────────┤
+│ ⑦ 底部工具列                              │  ESC006 的 b12–b17
+└─────────────────────────────────────────┘</code></pre>
+<blockquote class="concept"><p>⚠️ <strong>④ 與 ⑤ 的關係是本版面唯一需要特別注意的地方。</strong><br/>物件欄是<strong>獨立的左直欄</strong>，不隨主訊息區捲動、也不被疊層蓋住。<br/>所有疊層（互動面板、地圖、戰鬥面板…）都只蓋 ⑤，不蓋 ④——<br/>因為玩家需要在看疊層的同時還能點物件切換目標。</p></blockquote>
+<h3>H.11.3　⑤ 主訊息區的疊層（互斥）🟠</h3>
+<p>基礎是一般訊息串。以下疊層<strong>共用同一塊空間，同一時間只顯示一個</strong>：</p>
+<table><thead><tr><th>疊層</th><th>由什麼開啟</th><th>怎麼關</th></tr></thead><tbody><tr><td><strong>互動面板</strong></td><td><code>ESC001</code> / <code>ESC007</code> / <code>ESC008</code> / <code>ESC009</code></td><td>關閉鈕；或點擊<strong>不含</strong> <code>$txt#</code> 的動作</td></tr><tr><td>戰鬥面板</td><td><code>ESC016</code></td><td><code>ESC017</code>；或 <code>ESC002</code> 換房間</td></tr><tr><td>地圖</td><td><code>ESC011</code></td><td>關閉鈕</td></tr><tr><td>長文本分頁</td><td><code>ESC013</code></td><td>關閉鈕（另有上／下頁）</td></tr><tr><td>網頁</td><td><code>ESC045</code></td><td>關閉鈕</td></tr><tr><td>彈出選單</td><td><code>ESC020</code> / <code>pops:</code> 連結</td><td>點任一項；或點遮罩</td></tr><tr><td>傷害飄字</td><td><code>ESC024</code></td><td>動畫結束自動移除</td></tr><tr><td>頂部橫幅</td><td><code>ESC015</code></td><td>約 5 秒後自動淡出</td></tr></tbody></table>
+<p><strong>互動面板的內部結構</strong>（最複雜的一個，四個區塊由三個 opcode 分別填）：</p>
+<pre class="code"><code>┌──────────────────────────────────────────┐
+│ 詳情文字（ESC007）                  [關閉] │
+├──────────────────────────────────────────┤
+│ 輸入框 [________] [確定]   ← 只有 ESC001 顯示 │
+├────────────────────┬─────────────────────┤
+│ 動作列 ①（ESC008）  │ 動作列 ②（ESC009）   │
+│ 網格排列            │ 網格排列             │
+└────────────────────┴─────────────────────┘</code></pre>
+<blockquote class="concept"><p>⚠️ <strong><code>ESC007</code> 會清空兩組動作列。</strong><br/>順序永遠是「先 <code>007</code> 填詳情並清空動作 → 再 <code>008</code>/<code>009</code> 填動作」。<br/>若實作成「<code>007</code> 不清空」，上一個 NPC 的動作按鈕會殘留在下一個 NPC 的面板上，<br/>玩家點下去會送出對<strong>上一個</strong>目標的指令——這是很難查的錯。</p></blockquote>
+<h3>H.11.4　⑥ 方向盤 ⇄ 自訂按鈕列（互斥切換）🟠</h3>
+<p><strong>方向盤</strong>（預設狀態）：3×3 九宮格，中央是房間名，八方向環繞。</p>
+<pre class="code"><code>┌────┬────┬────┐
+│ ↖  │ ↑  │ ↗  │      西北  北  東北
+├────┼────┼────┤
+│ ←  │房間名│ →  │      西  [中央]  東
+├────┼────┼────┤
+│ ↙  │ ↓  │ ↘  │      西南  南  東南
+└────┴────┴────┘
+   額外出口（up / down / enter / out…）橫排在下方</code></pre>
+<ul><li><strong>只顯示伺服器有給的方向</strong>，其餘隱藏（不是變灰，是隱藏）</li><li>中央房間名可點擊開地圖</li><li>不在羅盤八方向的出口一律排在下方（見 H.4.1）</li></ul>
+<p><strong>自訂按鈕列</strong>：2 排 × 5 格 = 10 個插槽（<code>b1</code>–<code>b10</code>），由 <code>ESC006</code> 或使用者長按設定。<br/>建議預設三個：<code>score</code>（屬性）、<code>i</code>（物品）、<code>skills</code>（技能）。</p>
+<p><strong>切換規則</strong>：<code>ESC006</code> 送來任何 <code>b1</code>–<code>b17</code> 時<strong>自動切到自訂按鈕列</strong>（見 H.4.3 的副作用）。</p>
+<h3>H.11.5　★ opcode → 目的面板 全表</h3>
+<p><strong>這是把 H.4（怎麼解）接到 H.11（畫到哪）的那張表。</strong><br/>附錄 A 只對擴充 opcode 標了「去處」，核心 27 個的去處在此補齊：</p>
+<table><thead><tr><th>opcode</th><th>目的區塊</th><th>動作</th></tr></thead><tbody><tr><td><code>ESC002</code></td><td>② 標題列</td><td>設定房間名 ＋ <strong>觸發批次清空</strong>（見 H.7.4）</td></tr><tr><td><code>ESC004</code></td><td>③ 房間描述</td><td>取代</td></tr><tr><td><code>ESC023</code></td><td>③ 房間描述</td><td>顯示／隱藏切換</td></tr><tr><td><code>ESC003</code></td><td>⑥ 方向盤</td><td>建立／更新出口鍵</td></tr><tr><td><code>ESC903</code></td><td>⑥ 方向盤</td><td>移除單一方向</td></tr><tr><td><code>ESC913</code></td><td>⑥ 方向盤</td><td>清空全部</td></tr><tr><td><code>ESC005</code></td><td>④ 物件欄</td><td>建立清單</td></tr><tr><td><code>ESC905</code></td><td>④ 物件欄</td><td>依 tag 移除</td></tr><tr><td><code>ESC022</code></td><td>④ 物件欄</td><td>依 tag 更新血條</td></tr><tr><td><code>ESC021</code></td><td>② 標題按鈕列</td><td>重建</td></tr><tr><td><code>ESC006</code></td><td>⑥ 自訂按鈕列 ＋ ⑦ 工具列 ＋ ② 房間名(<code>bs</code>)</td><td>依槽位分派</td></tr><tr><td><code>ESC012</code></td><td>屬性條群（常置於 ② 或 ③ 之間）</td><td>重建</td></tr><tr><td><code>ESC001</code></td><td>⑤ 互動面板（含輸入框）</td><td>開啟</td></tr><tr><td><code>ESC007</code></td><td>⑤ 互動面板 · 詳情</td><td>填入 ＋ <strong>清空動作列</strong></td></tr><tr><td><code>ESC008</code></td><td>⑤ 互動面板 · 動作列①</td><td>重建</td></tr><tr><td><code>ESC009</code></td><td>⑤ 互動面板 · 動作列②</td><td>重建</td></tr><tr><td><code>ESC010</code></td><td>對話框（<strong>獨立模態</strong>，不在 ⑤ 內）</td><td>開啟</td></tr><tr><td><code>ESC011</code></td><td>⑤ 地圖疊層</td><td>填入</td></tr><tr><td><code>ESC013</code></td><td>⑤ 長文本疊層</td><td>填入</td></tr><tr><td><code>ESC020</code></td><td>⑤ 彈出選單疊層 ＋ 遮罩</td><td>開啟</td></tr><tr><td><code>ESC045</code></td><td>⑤ 網頁疊層</td><td>開啟</td></tr><tr><td><code>ESC015</code></td><td>頂部橫幅 ＋ 系統頻道</td><td><strong>兩個地方都要寫</strong></td></tr><tr><td><code>ESC016</code></td><td>⑤ 戰鬥面板 ＋ 系統頻道</td><td><strong>兩個地方都要寫</strong></td></tr><tr><td><code>ESC017</code></td><td>⑤ 戰鬥面板</td><td>關閉並清空</td></tr><tr><td><code>ESC024</code></td><td>⑤ 之上（動畫層）</td><td>一次性動畫</td></tr><tr><td><code>ESC100</code></td><td>① 迷你聊天列 ＋「全部」聊天頁</td><td><strong>兩個地方都要寫</strong></td></tr><tr><td>*預設／未知*</td><td>⑤ 主訊息串</td><td>附加（保留原文）</td></tr></tbody></table>
+<blockquote class="concept"><p>⚠️ <strong><code>015</code>／<code>016</code>／<code>100</code> 是「一送兩寫」。</strong><br/>它們同時進入一個即時區塊與一個歷史頻道。<br/>只寫一邊的症狀是「訊息看得到但翻不到歷史」或「歷史有但當下沒感覺」，<br/>兩種都會被回報成「聊天壞了」。</p></blockquote>
+<h3>H.11.6　顯示模式 🟠</h3>
+<p>三種模式，只影響配色（見 H.5.2）：</p>
+<table><thead><tr><th>模式</th><th>特徵</th></tr></thead><tbody><tr><td><code>night</code></td><td>深底，文字暖褐 <code>#ddbb99</code></td></tr><tr><td><code>day</code></td><td>淺底，<strong>綠／黃／青／白前景一律改寫為藍</strong>以維持可讀性</td></tr><tr><td><code>mud</code></td><td>純文字風格，文字 <code>#aaaaaa</code>，最接近傳統終端機</td></tr></tbody></table>
+<h3>H.11.7　共通互動規則 🟠</h3>
+<table><thead><tr><th>行為</th><th>規格</th></tr></thead><tbody><tr><td><strong>按鈕 → 指令</strong></td><td>每個可點元件身上掛一個「指令字串」，點擊即送出。<strong>全客戶端統一機制</strong></td></tr><tr><td>點擊物件</td><td>送指令 ＋ 記錄「目前目標」（名稱與 id）</td></tr><tr><td>動作含 <code>$txt#</code></td><td>點擊後<strong>保持面板開啟</strong>（供連續購買這類操作）</td></tr><tr><td>關閉互動面板</td><td>同時收起軟鍵盤、清空數量輸入框</td></tr><tr><td>長按自訂按鈕</td><td>跳出輸入框，格式「名稱,指令」，存入本地偏好</td></tr><tr><td>自動捲動</td><td>聊天列、戰鬥面板、主訊息區收到新訊息一律捲到底</td></tr></tbody></table>
+<hr/>
+<h2>H.12　會話生命週期</h2>
+<blockquote class="quote"><p>H.6 講的是「一次成功的登入」。這一節講<strong>其餘所有情況</strong>：斷線、逾時、換伺服器、重連。<br/>這是掛機型應用最常被略過、也最常出事的一塊。</p></blockquote>
+<h3>H.12.1　連線狀態機 🟠</h3>
+<pre class="code"><code>      ┌──────────┐
+      │   IDLE   │
+      └────┬─────┘
+           │ connect()
+      ┌────▼───────────┐
+      │  CONNECTING    │
+      └────┬───────┬───┘
+      成功 │       │ 失敗
+      ┌────▼───┐   │
+      │  OPEN  │   │
+      └──┬───┬─┘   │
+    斷線 │   │ 使用者主動關閉
+      ┌──▼───▼─────▼────┐
+      │  RECONNECTING    │──── 超過重試上限 ──▶ FAILED
+      └────────┬─────────┘
+               │ 成功
+               └──────────▶ OPEN</code></pre>
+<p><strong>重連策略</strong>：指數退避 <code>1s → 2s → 4s → 8s → 16s → 30s(上限)</code>，最多 <strong>8</strong> 次，<br/>且<strong>必須</strong>可由使用者隨時取消。</p>
+<h3>H.12.2　重連完成的信號 🟠</h3>
+<p>伺服器支援重連。重連成功後會送：</p>
+<pre class="code"><code>ESC000重连完毕</code></pre>
+<p>客戶端收到後<strong>必須自動送 <code>l</code></strong>（look）重新取得房間狀態——<br/>因為重連後伺服器不會主動重送房間面板，不送 <code>l</code> 的話畫面會停留在斷線前的舊狀態，<br/>玩家會以為還在原地，實際上角色可能已經被移動過。</p>
+<h3>H.12.3　進世界之後的「三拍 look」🟡</h3>
+<p><strong>這一條是實務上最容易漏、且症狀最像 bug 的一項。</strong></p>
+<p>收到 <code>ESC000 0007</code>（登入成功）之後，畫面<strong>不一定</strong>會自動出現房間面板，原因有二：</p>
+<ol><li>某些 mudlib 的 <code>enter_world()</code> 要<strong>再過幾拍</strong>才把角色移進起始房間 —— 太早 look 等於看空氣</li><li>某些 mudlib 進世界後還掛著 <code>请敲回车键［ＲＥＴＵＲＮ］</code> 的輸入等待 ——</li></ol>
+<p>   此時所有面板 opcode 都被緩衝住，一個字都出不來</p>
+<p><strong>規範作法</strong>：客戶端在收到 <code>0007</code> 之後<strong>分三拍送 <code>look</code></strong>，間隔 <strong>500ms / 2500ms / 5000ms</strong>。<br/>第一次很可能被當成那個 RETURN 的答案吃掉，第二次才是真正的 look。</p>
+<blockquote class="concept"><p>⚠️ 沒做這件事的症狀是「登入成功了，但畫面一片空白」，<br/>而且<strong>重開一次有時又好了</strong>（時序問題）——這種間歇性症狀會被誤判成連線不穩，<br/>實際上是少了這三拍。</p></blockquote>
+<h3>H.12.4　登入逾時與換伺服器</h3>
+<table><thead><tr><th>事件</th><th>觸發</th><th>處理</th></tr></thead><tbody><tr><td>登入逾時</td><td>伺服器送逾時訊息後關閉連線（見 H.6.5）</td><td>回到登入畫面，<strong>不要</strong>自動重連（會再逾時一次）</td></tr><tr><td>換伺服器</td><td><code>ESC900 &lt;ip&gt;:&lt;port&gt;</code></td><td>關閉現有連線 → 清空所有狀態 → 連新位址 → <strong>重跑完整登入流程</strong></td></tr><tr><td>伺服器主動踢</td><td><code>ESC999</code></td><td>立即結束，不重連</td></tr><tr><td><code>ZY609</code> 延時重登</td><td>payload = 毫秒數</td><td>等待指定毫秒後回登入畫面</td></tr></tbody></table>
+<blockquote class="concept"><p>⚠️ <strong><code>ESC900</code> 換伺服器時必須清空狀態樹。</strong><br/>沒清的話新伺服器的房間會疊在舊伺服器的物件與按鈕上，<br/>而這些殘留元件身上掛的指令會被送到<strong>新</strong>伺服器去。</p></blockquote>
+<hr/>
+<h2>H.13　本地狀態與偏好</h2>
+<p>需要持久化的項目如下（鍵名可自訂，<strong>項目與預設值應照用</strong>）：</p>
+<table><thead><tr><th>鍵</th><th>預設</th><th>說明</th></tr></thead><tbody><tr><td><code>theme</code></td><td><code>night</code></td><td><code>night</code> / <code>day</code> / <code>mud</code></td></tr><tr><td><code>fontScale</code></td><td><code>1</code></td><td>字級倍率</td></tr><tr><td><code>descHidden</code></td><td><code>false</code></td><td>房間描述是否摺疊（使用者手動偏好）</td></tr><tr><td><code>lastHost</code></td><td>—</td><td>上次連線位址</td></tr><tr><td><code>lastPort</code></td><td><strong><code>5001</code></strong></td><td>★ <strong>UTF-8 埠</strong>。填 5003 會整頁亂碼（H.1.4）</td></tr><tr><td><code>autoConnect</code></td><td><code>true</code></td><td>啟動時自動連線</td></tr><tr><td><code>rememberAccount</code></td><td><strong><code>false</code></strong></td><td>★ 見下方立場說明</td></tr><tr><td><code>accountId</code> / <code>accountPw</code> / <code>accountEmail</code></td><td><code>''</code></td><td>僅在 <code>rememberAccount</code> 為真時寫入</td></tr><tr><td><code>quickSlots</code></td><td><code>{}</code></td><td>槽位 → <code>{ label, cmd }</code>（長按自訂的按鈕）</td></tr><tr><td><code>history</code></td><td><code>[]</code></td><td>指令歷史</td></tr><tr><td><code>historyLimit</code></td><td><code>200</code></td><td>歷史上限</td></tr></tbody></table>
+<p><strong>讀取失敗時必須靜默回退到預設值，不得拋例外</strong>——<br/>偏好是啟動最前面被讀的東西，一拋整個畫面就起不來。</p>
+<p><strong>指令歷史規則</strong>：空字串不記；<strong>與上一筆相同不重複記</strong>；超過上限從頭截斷。</p>
+<blockquote class="concept"><p>⚠️ <strong>帳密的儲存立場（必須寫進交接文件）</strong><br/>ZJMUD 協議本身是<strong>明文傳輸</strong>，本地加密不會提高真實安全性，只會製造安全感。<br/>因此可以明文存——但<strong>必須設成 opt-in</strong>：<code>rememberAccount</code> 預設 <code>false</code>，<br/>使用者不主動勾選就完全不寫入。<br/>這個取捨要寫下來，否則下一個維護者會either 誤以為有加密、either 把它當成疏漏而「修掉」。</p></blockquote>
+<hr/>
+<h2>H.14　黃金會話樣本（可直接當測試 fixture）</h2>
+<blockquote class="quote"><p><strong>這一節是本附錄唯一「可以直接複製進測試檔」的內容。</strong><br/>以下每一行都是從真實伺服器（LPMud-Name，<code>:5001</code>）擷取的原始位元組，<strong>一字未改</strong>。<br/>它們不是對協議的理解，而是<strong>線路上真正跑的東西</strong>——<br/>任何一條在你的實作上失敗，就代表接真伺服器會出問題。</p><p>表示法：<code>ESC</code> = U+001B。實際資料中它是單一控制字元。</p></blockquote>
+<h3>H.14.1　實機擷取樣本 🟢</h3>
+<table><thead><tr><th>#</th><th>原始行</th><th>必須解出</th></tr></thead><tbody><tr><td>1</td><td><code>ESC002ESC[2;37;0mESC[1;31m阎罗殿ESC[2;37;0mESC[2;37;0m</code></td><td><code>room.title</code>，文字 = <code>阎罗殿</code>，前景 = <code>#ff3300</code></td></tr><tr><td>2</td><td><code>ESC004ESC[2;37;0m这里阴深恐怖…威严肃穆。ESC[2;37;0m</code></td><td><code>room.desc</code>，<strong>尾端重置碼不留殘字</strong></td></tr><tr><td>3</td><td><code>ESC003update here:ESC[1;35m更新地图ESC[2;37;0m$zj#info here:查看本地地图资料$zj#</code></td><td><code>room.exits</code> 共 <strong>2</strong> 筆（尾端空記錄被濾掉）；第 1 筆 <code>dir="update here"</code>、<code>slot=null</code>、<code>cmd="update here"</code></td></tr><tr><td>4</td><td><code>ESC005地藏王:look /d/register/npc/dizangwang#1686</code></td><td><code>room.objects</code> 1 筆，<code>cmd</code> <strong>完整保留</strong> <code>/</code> 與 <code>#</code></td></tr><tr><td>5</td><td><code>ESC005天性:look 天性$zj#天赋:look 天赋$zj#设置邮箱:look 设置邮箱$zj#转生:look 转生</code></td><td>4 筆</td></tr><tr><td>6</td><td><code>ESC022look /d/register/npc/dizangwang#1686$zj#850:850:850</code></td><td><code>room.objectBar</code>，<code>tag</code> <strong>與第 4 行的 <code>cmd</code> 完全相等</strong></td></tr><tr><td>7</td><td><code>ESC006b12:常用$br#指令ESC[2;37;0m:mycmds ofen$zj#b13:…$zj#b14:…</code></td><td><code>ui.quickButtons</code> 3 筆，<code>$br#</code> 已換成換行</td></tr><tr><td>8</td><td><code>ESC021飞行:help ditu$zj#客栈:recall$zj#…$zj#ESC[1;32m其ESC[1;36m他ESC[2;37;0m:help qt</code></td><td><code>ui.titleButtons</code>，最後一筆標籤跨兩種顏色</td></tr><tr><td>9</td><td><code>ESC007姓名：某某 (ESC[1;32mNameESC[2;37;0m) …ESC[u:cmds:uplv -l]ESC[s:26]ESC[1;33m【角色等级】…$br#</code></td><td><code>overlay.detail</code>；<strong><code>[u:</code> 與 <code>[s:</code> 的冒號在此直接被證實</strong></td></tr><tr><td>10</td><td><code>ESC009$1,1,10,28#ESC[1;32m修改密码ESC[2;37;0m:changepasswd</code></td><td><code>overlay.actions</code>，<code>column=2</code>，版面 <code>[1,1,10,28]</code></td></tr><tr><td>11</td><td><code>ESC0000007</code></td><td><code>conn.notice</code>，狀態碼 <code>0007</code>（登入成功）</td></tr><tr><td>12</td><td><code>ESC0000008</code></td><td><code>conn.notice</code>，狀態碼 <code>0008</code>（需建角）</td></tr><tr><td>13</td><td><code>ESC905look 天性</code></td><td><code>room.objectRemove</code>，<code>tag="look 天性"</code></td></tr></tbody></table>
+<h3>H.14.2　這 13 行各自鎖住什麼</h3>
+<p><strong>這不是隨便挑的 13 行</strong>，每一行都對應本附錄的一個陷阱：</p>
+<table><thead><tr><th>#</th><th>鎖住的陷阱</th><th>對應章節</th></tr></thead><tbody><tr><td>1</td><td><strong>重置碼在 opcode 之後</strong>（不是之前）</td><td>H.2.1</td></tr><tr><td>2</td><td>尾端重置碼不可留殘字</td><td>H.5.1</td></tr><tr><td>3</td><td><strong>方向欄含空白</strong> ＋ <strong>尾端空記錄</strong> ＋ 第 3 欄省略</td><td>H.4.1、H.4.11</td></tr><tr><td>4</td><td><strong>只切第一個冒號</strong>（<code>/</code> 與 <code>#</code> 不可被切）</td><td>H.4.2</td></tr><tr><td>6</td><td>血條 tag <strong>必須等於</strong>物件 cmd</td><td>H.4.8</td></tr><tr><td>7</td><td><code>$br#</code> → 換行</td><td>H.4.3</td></tr><tr><td>8</td><td>一個標籤跨多段樣式</td><td>H.5.1</td></tr><tr><td>9</td><td><strong><code>[u:</code> / <code>[s:</code> 的冒號</strong></td><td>H.5.1</td></tr><tr><td>10</td><td>版面前綴解析 ＋ <code>009</code> 是右欄</td><td>H.4.0.1</td></tr><tr><td>11–12</td><td><code>ESC000</code> 是<strong>狀態碼</strong>不只是文字</td><td>H.6.3</td></tr><tr><td>13</td><td><code>905</code> 用 tag 移除</td><td>H.4.2</td></tr></tbody></table>
+<blockquote class="review"><p>🔍 老手視角──真正的門道<br/>一份規格最有價值的部分往往不是文字，而是<strong>一組會失敗的輸入</strong>。<br/>上面 13 行的價值在於：它們全都是<strong>真實資料</strong>，而且每一行都精確對應一個「照直覺寫就會寫錯」的地方。<br/>第 3 行尤其典型——<code>update here</code> 是個帶空白、不是羅盤方向、第 3 欄還省略的出口，<br/>一行同時踩三個坑。任何實作者只要跑通這 13 行，協議層基本就不會有大問題。<br/><strong>拿到新協議時，先想辦法擷取一份真實會話，再開始寫程式碼</strong>——<br/>順序反過來的人，會花三倍時間在辯論「規格應該是什麼意思」。</p></blockquote>
+<h3>H.14.3　怎麼用這份樣本</h3>
+<pre class="code"><code>1. 把 13 行原樣存成 fixture（ESC 用 ）
+2. 對每一行呼叫你的 decode，比對「必須解出」那一欄
+3. 這 13 條全綠 → 協議層可以交付
+4. 之後每次改協議層，這 13 條都必須維持全綠（回歸測試）</code></pre>
+<hr/>
+<h2>H.15　可驗證的伺服器環境</h2>
+<blockquote class="quote"><p><strong>沒有伺服器就無法驗收。</strong> H.8.3 的實機三步、H.14 的樣本比對，<br/>都需要一台能跑的 ZJMUD 伺服器。這一節說明最小需要什麼。</p></blockquote>
+<h3>H.15.1　一台 zjmud 伺服器至少要有的三樣東西 🟡</h3>
+<table><thead><tr><th>#</th><th>元件</th><th>位置</th><th>職責</th></tr></thead><tbody><tr><td>1</td><td><strong>登入入口</strong></td><td><code>adm/daemons/logind</code></td><td>握手 → 版本確認 → 帳號欄位 → 建角欄位 → 狀態碼 → 進世界（H.6.3 的全部）</td></tr><tr><td>2</td><td><strong>面板 daemon</strong></td><td><code>adm/daemons/zjmudd</code></td><td>把 mudlib 既有資料翻成 opcode</td></tr><tr><td>3</td><td><strong>協議標頭</strong></td><td><code>include/zjmud.h</code></td><td>提供 <code>ESA</code>、<code>SYSY</code>、<code>ZJTITLE</code>… 等巨集</td></tr></tbody></table>
+<blockquote class="concept"><p>⚠️ <strong>登入入口必須注入 <code>logind</code> 本身，不能做成獨立 daemon。</strong><br/>建立新角色要呼叫 <code>init_new_player()</code>，而它在每一家 mudlib 都是 <code>private</code> ——<br/>從外部呼叫不到。</p></blockquote>
+<h3>H.15.2　面板 daemon 的三個介面 🟡</h3>
+<p>它是<strong>轉換層</strong>，不是原 mudlib 的一部分：原本的文字輸出完全不動，只是額外再送一份 opcode。</p>
+<pre class="code"><code>void room_panel(object me, object env);   // 送 002 → 004 → 003 → 005 → 006/021/022
+void status_panel(object me);             // 送 012
+void item_panel(object me, object ob);    // 送 007 + 008</code></pre>
+<p><strong>觸發點是 look 指令</strong>——在房間文字輸出之後掛一行：</p>
+<pre class="code"><code>"/adm/daemons/zjmudd"-&gt;room_panel(me, env);
+"/adm/daemons/zjmudd"-&gt;status_panel(me);</code></pre>
+<blockquote class="concept"><p>💡 這個設計解釋了一件事：<strong>為什麼面板總是跟著 <code>look</code> 一起出現。</strong><br/>客戶端每次點出口、點物件，實際上都在觸發伺服器重跑一次 look，<br/>於是整組面板 opcode 被重送。這也是為什麼 H.12.3 的「三拍 look」有效。</p></blockquote>
+<h3>H.15.3　最小驗證流程</h3>
+<pre class="code"><code>① 起伺服器，telnet 連 :5001
+② 應立刻收到 6 組 IAC + 版本挑戰行
+③ 送任意非 "//" 字串 → 應回「版本验证成功」
+④ 送 帳號║密碼║key║email → 應收到 ESC000 0007 或 0008
+⑤ 送 look → 應收到 ESC002 / ESC004 / ESC003 / ESC005 一整組</code></pre>
+<p><strong>第 ⑤ 步收到的東西，就是 H.14 那份樣本的來源。</strong><br/>自己擷取一份，就有了屬於自己伺服器的黃金樣本。</p>
+<h3>H.15.4　沒有伺服器時的退路</h3>
+<p>如果暫時拿不到伺服器，<strong>仍然可以完成協議層</strong>（H.1–H.5）：</p>
+<table><thead><tr><th>能做</th><th>不能做</th></tr></thead><tbody><tr><td>用 H.14 的 13 行當 fixture 做單元測試</td><td>驗證登入流程（H.6）</td></tr><tr><td>驗證所有 payload 解析</td><td>驗證三拍 look（H.12.3）</td></tr><tr><td>驗證樣式與調色盤</td><td>驗證面板副作用的實際觀感</td></tr><tr><td>驗證未知 opcode 降級</td><td>確認方言 profile 判別正確</td></tr></tbody></table>
+<blockquote class="concept"><p>⚠️ <strong>但不要以為單元測試全綠就等於能用。</strong><br/>本書第五篇整篇都在講這件事：七次交付了不能用的東西，<br/>其中好幾次都是「測試全綠、真機一按就死」。<br/>H.14 的 13 行能擋住協議層的錯，擋不住時序、狀態與版面的錯。</p></blockquote></section></main></div>
 <script>
 const links=[...document.querySelectorAll('#side a')];
 const secs=links.map(a=>document.querySelector(a.getAttribute('href')));

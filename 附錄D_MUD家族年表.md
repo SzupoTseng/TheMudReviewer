@@ -12,7 +12,7 @@
 
 | 年 | 事件 | 關鍵人物／出處 | 本專案有實物嗎 |
 |---|------|--------------|--------------|
-| **1978** | **MUD1** — 第一個多人虛擬世界，英國 Essex 大學 | Roy Trubshaw、Richard Bartle | — |
+| **1978** | **MUD1** — 第一個多人虛擬世界，英國 Essex 大學。**1978 為起算年；核心完成與交棒給 Bartle 約在 1980**（三個來源三個年份的辨析見附錄 I.1.3） | Roy Trubshaw、Richard Bartle | 🟡 Bartle 為 Duncan Howard《An Introduction to MUD》(1985) 所寫的序（附錄 I.1） |
 | 1987 | **AberMUD** — 以 MUD 為靈感重寫，命名自 Aberystwyth | Alan Cox | — |
 | **1989-04** | **LPMud** — driver／mudlib 分家、LPC 語言誕生；第一個實作叫 **Genesis**。名字裡的 `cd` 是 **Chalmers Datorförening**，Lars 所屬的電腦社 | **Lars Pensjö**（`lars@cd.chalmers.se`） | 🟢 `Credits.LPmud`（上游封存的一手史料，§033） |
 | 1989 | **TinyMUD** — 砍掉戰鬥，主打玩家共建與交談；一個週末寫成 | Jim Aspnes（CMU） | — |

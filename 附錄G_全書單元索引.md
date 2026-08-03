@@ -180,6 +180,7 @@
 | E | FluffOS / LPC 技術速查（efun／apply／config／telnet／WASM API／VM 指令） |
 | F | 17 份 mudlib 的血緣、落差與實測數據 |
 | **G** | **本頁**：全書單元索引 ＋ 引用結構 |
+| **H** | **ZJMUD 協議規格與客戶端系統分析** —— 語言中立的規範層：傳輸層／opcode 分派／逐 opcode payload／樣式方言／登入狀態機／架構與驗收矩陣。**不必讀正文也能照做** |
 
 ---
 

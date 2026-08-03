@@ -293,11 +293,11 @@ private void get_user(string arg, object ob)
 **证据等级**：🟢 本项目实测（`src/js/telnetlogin.js`，每条规则出自对应 lib 的 logind 原代码）
 
 **起源**：`mudlibs.fluffos.info` 是 FluffOS 社群做的中文 MUD 博物馆——
-**97 个 1990 年代以降的中文 LPC mudlib，全部用 WebAssembly 跑在浏览器里，
-全部标为可玩**。本项目的 `libs/` 布局就是参考它的 `fluffos/mudlibs` 仓库来的。
+**199 个 1990 年代以降的中文 LPC mudlib，全部用 WebAssembly 跑在浏览器里，
+其中 193 个标为可玩**。本项目的 `libs/` 布局就是参考它的 `fluffos/mudlibs` 仓库来的。
 
 于是一个很自然的念头：既然 driver 一样、加载方式一样，
-**能不能用 zjmud 客户端去玩那 97 个？**
+**能不能用 zjmud 客户端去玩那 193 个？**
 
 答案是：**连得上、看得到招牌、进不去。**
 
@@ -347,7 +347,7 @@ export const PROFILES = {
 | **规则由上往下比对，一行最多触发一条** | 提示字符串会互相包含（「请再输入一次您的密码」含「密码」） | 顺序变成隐性契约，改动要小心 |
 | **`once` 语意（触发过就不再触发）** | 服务器重印提示时不要重复送 | 需要一个 `seen` 集合 |
 | **帐密来自登录窗口，其余（email／种族／中文名）用固定值** | 那些字段用户不在乎，也没有 UI 可问 | 所有用这条路径建的角色 email 都一样 |
-| **`generic-cn` 退路，字眼取自多个家族 logind 的交集** | 97 个 lib 不可能一个一个写 profile | 交集规则比专属 profile 脆 |
+| **`generic-cn` 退路，字眼取自多个家族 logind 的交集** | 193 个 lib 不可能一个一个写 profile | 交集规则比专属 profile 脆 |
 
 **整层都在客户端**——mudlib 一个字节都不动，driver 也不用改。
 
@@ -371,7 +371,7 @@ export const PROFILES = {
 | 路线 | 做法 | 代价 |
 |------|------|------|
 | **A：客户端剖析文本** | 用规则从「大厅 - 你站在一个宽敞的大厅里。出口有：north east」剖出房间名与出口 | **脆**。每个 lib 的排版不一样，改版就坏；本质上是在重蹈本书 §004 说的「没有跳脱的分隔符」老路 |
-| **B：改 mudlib 加 opcode** | 在对方的 mudlib 里加上 `ESC003` 之类的输出 | 要动别人的 mudlib，等于替 97 个 lib 各做一次移植 |
+| **B：改 mudlib 加 opcode** | 在对方的 mudlib 里加上 `ESC003` 之类的输出 | 要动别人的 mudlib，等于替 193 个 lib 各做一次移植 |
 
 本项目选了**两条都不走**，只交付第一层，并把边界写在文件的顶端注解里。
 取舍的完整讨论在 `docs/zjmud_migration_SOP.md` §5。
@@ -382,9 +382,9 @@ zjmud 方言的 mud 走完整 GUI，传统 telnet 的 mud 走纯文本，
 罩门是 profile 表是**规则的集合而不是状态机**：
 它不知道自己现在在登录流程的第几步，只知道「这一行像什么」。
 所以一个提示字符串出现在意料之外的位置，它就会答错。
-这是刻意的取舍——状态机要为 97 个 lib 各写一份，规则表可以共用。
+这是刻意的取舍——状态机要为 193 个 lib 各写一份，规则表可以共用。
 
-**效益**：`mudlibs.fluffos.info` 那 97 个 lib 全部标为可玩，
+**效益**：`mudlibs.fluffos.info` 那 199 个 lib 有 193 个标为可玩，
 本项目收录 17 个并且 17 个都可玩。
 两者的差别不在 driver（同一份），而在**客户端要不要理解对方的方言**——
 博物馆用的是通用 telnet 终端机（xterm.js），

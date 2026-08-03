@@ -166,7 +166,7 @@ TMI 找了約十個人開會、開了兩個月的佈告欄收集意見——
 **優點 / 罩門**：分支的優點是 MudOS 真的把 driver 往前推了一大截，
 而且它的「batteries-included」路線（大量內建 efun、套件化）
 後來成為中文 MUD 圈的事實標準——本專案收藏的 17 個 mudlib，
-以及 `mudlibs.fluffos.info` 上那 97 個，幾乎全部長在 MudOS 系的 driver 上。
+以及 `mudlibs.fluffos.info` 上那 199 個，幾乎全部長在 MudOS 系的 driver 上。
 
 罩門是**社群分裂**。1992 年之後 LPMud 家族再也沒有統一過：
 Lars 的 3.x 線由別人接手成為 LDMud，MudOS 走自己的路，Genesis 那邊改叫 CD。
@@ -266,7 +266,7 @@ FluffOS 在保持相容的同時換掉的東西不少：
 
 **優點 / 罩門**：優點是**時間軸上的可攜性**——一份沒人維護的 mudlib，
 在原作者消失二十年後，還能被別人跑起來、看見它當年長什麼樣。
-本書收錄的 `mudlibs.fluffos.info` 那 97 個中文 mudlib 就是這件事的規模化版本。
+本書收錄的 `mudlibs.fluffos.info` 那 199 個中文 mudlib 就是這件事的規模化版本。
 
 罩門有兩個。其一，**相容性承諾會凍結錯誤**：
 `sscanf("%s %s")` 那個和 C 不一樣的語意（第二個 `%s` 吃掉剩下全部）
